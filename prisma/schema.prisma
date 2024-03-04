@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum CompanyIndustry {
+  TECHNOLOGY
+  HEALTHCARE
+  FINANCE
+  RETAIL
+  EDUCATION
+  ENERGY
+  UTILITIES
+  INDUSTRIAL
+  TELECOMMUNICATIONS
+  TRANSPORTATION
+  REAL_ESTATE
+  MEDIA
+  HOSPITALITY
+  PROFESSIONAL_SERVICES
+}
+
+model Company {
+  id        String          @id @default(uuid())
+  name      String
+  industry  CompanyIndustry
+  teams     Team[]
+  adminId   Int             @unique
+  admin     User            @relation(fields: [adminId], references: [id])
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model Team {
+  id          String        @id @default(uuid())
+  name        String
+  company     Company       @relation(fields: [companyId], references: [id])
+  companyId   String
+  members     User[]        @relation("TeamMembers")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  TeamMembers TeamMembers[]
+}
+
+model User {
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  name        String
+  role        Role          @default(MEMBER)
+  companyId   String?
+  company     Company?
+  teams       Team[]        @relation("TeamMembers")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  TeamMembers TeamMembers[]
+}
+
+model TeamMembers {
+  teamId String
+  userId Int
+  team   Team   @relation(fields: [teamId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@id([teamId, userId])
+}
