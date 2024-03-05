@@ -4,8 +4,10 @@ import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from './ui/input'
-import { Button } from './ui/button'
+import { Input } from '../ui/input'
+import { Button } from '../ui/button'
+import GoogleSignInButton from '../ui/GoogleSignInButton'
+import Link from 'next/link'
 
 
 const formSchema = z.object({
@@ -52,11 +54,11 @@ const SignInForm = () => {
   }
 
   return (
-    <div>
-      <Form {...form}>
+      <Form {...form} className='flex flex-col items-center justify-center'>
+        <h1 className=''>Enter your info to sign up</h1>
         <form 
             onSubmit={form.handleSubmit(handleSubmit)} 
-            className='max-w-md w-full m-6 flex flex-col gap-4'>
+            className='flex flex-col gap-4 mt-8 leading-7'>
           
           <FormField control={form.control} name='email' 
           render={({field}) => {
@@ -92,8 +94,10 @@ const SignInForm = () => {
           }}/>
           <Button type='submit' className='w-full'>Sign Up</Button>
         </form>
+        <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>or</div>
+        <GoogleSignInButton>Sign up with Google</GoogleSignInButton>
       </Form>
-    </div>
+    
   )
 }
 

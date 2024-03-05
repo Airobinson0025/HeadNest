@@ -11,10 +11,10 @@ const Hero = () => {
         </div>
 
         <div className='flex flex-col text-center space-y-3'>
-            <Link href='/register'>
+            <Link href='/sign-up'>
                 <Button>Sign Up</Button>
             </Link>
-            <Link href='/signin'>
+            <Link href='/sign-in'>
                 <Button>Sign In</Button>
             </Link>
         </div>
