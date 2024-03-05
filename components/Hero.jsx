@@ -12,10 +12,10 @@ const Hero = () => {
 
         <div className='flex flex-col text-center space-y-3'>
             <Link href='/register'>
-                <Button>Register Your Company</Button>
+                <Button>Sign Up</Button>
             </Link>
-            <Link href='/accesscode'>
-                <Button>Sign In With Access Code</Button>
+            <Link href='/signin'>
+                <Button>Sign In</Button>
             </Link>
         </div>
     </div>
