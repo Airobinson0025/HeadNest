@@ -58,7 +58,7 @@ const SignInForm = () => {
 
   return (
       <Form {...form} className='flex flex-col items-center justify-center'>
-        <h1 className=''>Enter your info to sign up</h1>
+        <h1 className='text-center'>Create an account</h1>
         <form 
             onSubmit={form.handleSubmit(handleSubmit)} 
             className='flex flex-col gap-4 mt-6 leading-7'>
