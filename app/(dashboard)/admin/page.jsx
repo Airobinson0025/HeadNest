@@ -2,12 +2,18 @@ import React from 'react'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 
-const page = async () => {
+const Page = async () => {
   const session = await getServerSession(authOptions)
-  console.log(session)
+  // console.log(session)
+
+  if(!session) {
+    return (
+      <div>Please sign in to view dashboard</div>
+    )
+  } else {
   return (
-    <div>Welcome to admin</div>
-  )
+    <div>Welcome {session.user.name}</div>
+  )}
 }
 
-export default page
+export default Page

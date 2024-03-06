@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 
 
 const formSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters long' }),
   email: z.string().email(),
   password: z.string().min(6, { message: 'Password must be at least 6 characters long' }).regex(/[!@#$%^&*(),.?":{}|<>]/, { message: 'Password must contain at least one special character' }),
   passwordConfirmation: z.string()
@@ -28,6 +29,7 @@ const SignInForm = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: '',
       email: '',
       password: '',
       passwordConfirmation: ''
@@ -41,6 +43,7 @@ const SignInForm = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        name: values.name,
         email: values.email,
         password: values.password,
         passwordConfirmation: values.passwordConfirmation
@@ -62,6 +65,17 @@ const SignInForm = () => {
         <form 
             onSubmit={form.handleSubmit(handleSubmit)} 
             className='flex flex-col gap-4 mt-6 leading-7'>
+
+          <FormField control={form.control} name='name' 
+          render={({field}) => {
+            return <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder='Enter full name' type='text' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          }}/> 
           
           <FormField control={form.control} name='email' 
           render={({field}) => {

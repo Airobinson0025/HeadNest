@@ -5,6 +5,7 @@ import * as z from 'zod';
 
 //Define schema for input validation
 const userSchema = z.object({
+    name: z.string().min(2, { message: 'Name must be at least 2 characters long' }),
     email: z.string().email(),
     password: z.string().min(6, { message: 'Password must be at least 6 characters long' }).regex(/[!@#$%^&*(),.?":{}|<>]/, { message: 'Password must contain at least one special character' }),
     passwordConfirmation: z.string()
@@ -14,7 +15,7 @@ const userSchema = z.object({
 export async function POST(req) {
     try {
         const body = await req.json();
-        const { email, password } = userSchema.parse(body);
+        const { name, email, password } = userSchema.parse(body);
 
         //check if user exists
         const existingUserByEmail = await prisma.user.findUnique({
@@ -29,8 +30,10 @@ export async function POST(req) {
         //create user
         const newUser = await prisma.user.create({
             data: {
+                name,
                 email,
-                password: hashedPassword
+                password: hashedPassword,
+                
             }
         })
 

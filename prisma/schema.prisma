@@ -12,6 +12,7 @@ datasource db {
 
 model User {
   id        String    @id @default(uuid())
+  name      String
   email     String    @unique
   password  String
   account   Account[]
@@ -21,7 +22,7 @@ model User {
 
 model Account {
   id             String   @id @default(uuid())
-  name           String
+  username       String
   image          String
   dateofBirth    DateTime
   genderIdentity String?
