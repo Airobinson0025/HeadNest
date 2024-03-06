@@ -8,6 +8,8 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import GoogleSignInButton from '../ui/GoogleSignInButton'
 import Link from 'next/link'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
     email: z.string().min(1, 'Email is required').email('Invalid email'),
@@ -20,6 +22,8 @@ const formSchema = z.object({
 
 const SignInForm = () => {
 
+    const router = useRouter()
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -28,8 +32,17 @@ const SignInForm = () => {
         }
     })
 
-    const handleSubmit = () => {
-        console.log('Form Submitted')
+    const handleSubmit = async (values) => {
+        const signInData = await signIn('credentials', {
+            email: values.email,
+            password: values.password,
+            redirect: false
+        });
+        if(signInData.error) {
+            console.log(signInData.error)
+        } else {
+            router.push('/admin')
+        }
     }
 
   return (
@@ -37,7 +50,7 @@ const SignInForm = () => {
         <h1 className='text-center'>Sign In</h1>
         <form 
             onSubmit={form.handleSubmit(handleSubmit)}
-            className='flex flex-col gap-4 mt-8'>
+            className='flex flex-col gap-4 mt-6'>
             
             <FormField
                control={form.control}
@@ -46,7 +59,7 @@ const SignInForm = () => {
                 <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                        <Input placeholder='mail@example.com' {...field} />
+                        <Input placeholder='Mail@example.com' {...field} />
                     </FormControl>
                     <FormMessage />
                 </FormItem>

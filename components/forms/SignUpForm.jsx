@@ -7,7 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import GoogleSignInButton from '../ui/GoogleSignInButton'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 
 const formSchema = z.object({
@@ -22,6 +22,8 @@ const formSchema = z.object({
 })
 
 const SignInForm = () => {
+
+  const router = useRouter()
   
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -45,6 +47,7 @@ const SignInForm = () => {
       })
     })
     if(response.ok) {
+      router.push('/sign-in')
       const data = await response.json()
       console.log(data, { message: 'Registraion Successful' })
     } else {
@@ -58,7 +61,7 @@ const SignInForm = () => {
         <h1 className=''>Enter your info to sign up</h1>
         <form 
             onSubmit={form.handleSubmit(handleSubmit)} 
-            className='flex flex-col gap-4 mt-8 leading-7'>
+            className='flex flex-col gap-4 mt-6 leading-7'>
           
           <FormField control={form.control} name='email' 
           render={({field}) => {
