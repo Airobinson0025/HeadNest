@@ -49,8 +49,8 @@ const MainNav = () => {
 
       <div className='hidden lg:inline'>
         { session ? (
-          <div className='flex items-center gap-3'>
-            <p className='text-sm font-semibold'>Welcome back, {firstName}!</p>
+          <div className='flex items-center gap-2'>
+            <p className='text-sm font-semibold'>{firstName}</p>
             <ProfileAvatar />
           </div>
         ) : (

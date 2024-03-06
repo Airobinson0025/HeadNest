@@ -8,11 +8,15 @@ const Page = async () => {
 
   if(!session) {
     return (
-      <div>Please sign in to view dashboard</div>
+      <div className='min-h-screen flex items-center justify-center'>
+        <h2>Please create an account or sign in to view dashboard</h2>
+      </div>
     )
   } else {
   return (
-    <div>Welcome {session.user.name}</div>
+    <div className='min-h-screen flex items-center justify-center'>
+      <h2>Welcome {session.user.name}</h2>
+    </div>
   )}
 }
 

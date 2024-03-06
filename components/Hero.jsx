@@ -7,7 +7,7 @@ const Hero = () => {
     <div className='flex flex-col items-center justify-center bg-cover bg-center h-[700px] px-14 '>
 
         <div className='my-6'>
-            <h1>Logo Here</h1>
+            <h1>Headline Here</h1>
         </div>
 
         <div className='flex flex-col text-center space-y-3'>
