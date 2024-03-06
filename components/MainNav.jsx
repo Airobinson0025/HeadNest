@@ -28,7 +28,7 @@ const MainNav = () => {
       
       <div>
         <Link href='/'>
-          <Image src='/BlackLogoNoBg.png' height={180} width={180} alt='logo' />
+          <Image src='/BlackLogoNoBg.png' height={160} width={160} alt='logo' />
         </Link>
       </div>
 
