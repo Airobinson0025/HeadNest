@@ -73,7 +73,7 @@ const SignInForm = () => {
             return <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder='Enter full name' type='text' {...field} />
+                <Input placeholder='First and last name' type='text' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

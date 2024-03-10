@@ -20,7 +20,7 @@ import { Controller } from 'react-hook-form'
 const formSchema = z.object({
     username: z.string().min(2, { message: 'Username must be at least 2 characters long' }),
     dateOfBirth: z.date(),
-    gender: z.string(),
+    genderIdentity: z.string(),
     pronouns: z.string(),
     phoneNumber: z.string().min(10, { message: 'Phone number must be at least 10 characters long' }),
     bio: z.string().max(200, { message: 'Bio cannot be more the 200 characters long.' })
@@ -34,7 +34,7 @@ const AccountInfoForm = () => {
         defaultValues: {
           username: '',
           dateOfBirth: '',
-          gender: '',
+          genderIdentity: '',
           pronouns: '',
           phoneNumber: '',
           bio: ''
@@ -42,9 +42,9 @@ const AccountInfoForm = () => {
       })
 
       const handleSubmit = async (values) => {
-        const userId = localStorage.getItem('userIdForAccountInfo')
+        const userId = JSON.parse(localStorage.getItem('userIdForAccountInfo'))
         console.log(userId)
-        const response = await fetch(`/api/user/${userId}/account`, {
+        const response = await fetch(`/api/user/profile/${userId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -52,7 +52,7 @@ const AccountInfoForm = () => {
             body: JSON.stringify({
                 username: values.username,
                 dateOfBirth: values.dateOfBirth,
-                gender: values.gender,
+                genderIdentity: values.genderIdentity,
                 pronouns: values.pronouns,
                 phoneNumber: values.phoneNumber,
                 bio: values.bio
@@ -138,7 +138,7 @@ const AccountInfoForm = () => {
 
 <FormField
           control={form.control}
-          name="gender"
+          name="genderIdentity"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Gender</FormLabel>
@@ -165,7 +165,7 @@ const AccountInfoForm = () => {
           name="pronouns"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Prnouns</FormLabel>
+              <FormLabel>Pronouns</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>

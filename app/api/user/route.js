@@ -32,12 +32,12 @@ export async function POST(req) {
             data: {
                 name,
                 email,
-                password: hashedPassword,
-                
+                password: hashedPassword
             }
         })
 
         const { password: newUserPassword, ...rest } = newUser;
+
 
         return NextResponse.json({ user: rest, message: 'User created successfully' }, { status: 201 })
     
