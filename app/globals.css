@@ -98,3 +98,7 @@ p {
 FormLabel {
   @apply font-medium;
 }
+
+.rdp-vhidden {
+  @apply hidden;
+}

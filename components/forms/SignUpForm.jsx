@@ -50,9 +50,11 @@ const SignInForm = () => {
       })
     })
     if(response.ok) {
-      router.push('/sign-in')
       const data = await response.json()
+      localStorage.setItem('userIdForAccountInfo', JSON.stringify(data.user.id))
+      router.push('/account-info')
       console.log(data, { message: 'Registraion Successful' })
+      console.log(localStorage.getItem('userIdForAccountInfo'))
     } else {
       const error = await response.json()
       console.log(error, { message: 'Registration Failed' })
