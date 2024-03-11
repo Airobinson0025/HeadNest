@@ -40,6 +40,7 @@ const MainNav = () => {
               </NavigationMenuItem>
               <NavigationMenuLink href='/admin' className={navigationMenuTriggerStyle()}>Dashboard</NavigationMenuLink>
               <NavigationMenuLink href='/pricing' className={navigationMenuTriggerStyle()}>Pricing</NavigationMenuLink>
+              <NavigationMenuLink href='/mission' className={navigationMenuTriggerStyle()}>Mission</NavigationMenuLink>
               <NavigationMenuItem>
                  <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
              </NavigationMenuItem>

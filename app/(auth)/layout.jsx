@@ -2,8 +2,8 @@ import React from 'react';
 
 const AuthLayout = ({ children }) => {
   return (
-    <div className="max-w-md m-6">
-      <div>
+    <div>
+      <div className="max-w-md m-6">
         {children}
       </div>
     </div>

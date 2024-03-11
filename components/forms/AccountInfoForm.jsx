@@ -73,9 +73,9 @@ const AccountInfoForm = () => {
 
   return (
     <Form {...form}>
-        <h1 className='text-center'>Account Info</h1>
+        <h1 className='text-center md:text-left'>Let&apos;s create your profile.</h1>
         <form onSubmit={form.handleSubmit(handleSubmit)}
-            className='flex flex-col gap-4 mt-6'>
+            className='flex flex-col gap-4 mt-8'>
 
             <FormField
                control={form.control}
