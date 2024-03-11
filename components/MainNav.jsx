@@ -14,11 +14,11 @@ import {
 import ProfileAvatar from './ProfileAvatar'
 import { Button } from './ui/button'
 import Image from 'next/image'
+import { RiMenu3Line } from 'react-icons/ri'
 
 const MainNav = () => {
   
   const { data: session } = useSession()
-  console.log(session)
 
   const firstName = session?.user.name.split(' ')[0]
   
@@ -32,7 +32,7 @@ const MainNav = () => {
         </Link>
       </div>
 
-      <nav className='hidden md:inline'>
+      <nav className='hidden lg:inline'>
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -48,20 +48,11 @@ const MainNav = () => {
          </NavigationMenu>
       </nav>
 
-      <div className='hidden lg:inline'>
-        { session ? (
-          <div className='flex items-center gap-2'>
-            <p className='text-sm font-semibold'>{firstName}</p>
-            <ProfileAvatar />
-          </div>
-        ) : (
-          <Link href='/sign-in'>
-            <Button>Sign in</Button>
-          </Link>
-        )}
+      <div className='lg:hidden border border-primary p-1 rounded-md'>
+        <RiMenu3Line size={22} color='black'/>
       </div>
     </div>
   )
 }
 
-export default MainNav
+export default MainNav 
